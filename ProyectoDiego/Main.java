@@ -16,6 +16,8 @@ public class Main {
         Herramienta herramienta2;
         Herramienta herramienta3;
         */
+        Herramienta herramienta1 = new Herramienta();
+        MiembroEquipo mentor = new MiembroEquipo("");
         while(true){
 
             //Imprimir opciones del menu
@@ -32,18 +34,22 @@ public class Main {
                 case 1:
                     System.out.print("Ingresa el nombre del miembro del equipo: ");
                     String nombre = sc.next();
-                    //mentor = new Mentor("Diego");
+                    mentor = new MiembroEquipo(nombre);
                     break;
                 case 2:
-                    System.out.print("Ingresa el nombre de la herramienta: ");
-                    String herramienta = sc.next();
                     //Llamar al constructor de herramienta
+                    herramienta1.registrarHerramienta();
                     break;
                 case 3:
-                    System.out.print("Ingresa la herramienta: ");
-                    String nombreHerramienta = sc.next();
+                    System.out.print("Ingresa la cantidad que solicitas");
+                    int cantidad = sc.nextInt();
+                    herramienta1.prestarHerramienta(cantidad);
                     break;
-                case 4: break;
+                case 4: 
+                    System.out.println("¿Cuántas vas a devolver?");
+                    int cantidad = sc.nextInt();
+                    herramienta1.devolverHerramienta(cantidad);
+                    break;
                 case 5: return;
             }
         }
