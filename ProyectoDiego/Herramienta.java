@@ -6,23 +6,13 @@ public class Herramienta{
   Scanner scan = new Scanner(System.in);
   
   public String nombreDeHerramienta;
-  public final ID = rand.ints(0,1000);
+  public final int ID = rand.nextInt(1000);
   protected int cantidad;
-  private boolean disponible;
-  public Herramienta(){
-    nombreDeHerramienta = "";
-    cantidad = 0;
-    disponible = false;
-  }
-
-  public void registrarHerramienta(){
-    System.out.println("Pon el nombre de la herramienta\n");
-    nombreDeHerramienta = scan.next();
-    System.out.println("Ingresa la cantidad de " + nombreDeHerramienta + " que registras\n");
-    cantidad += scan.nextInt();
-    if (cantidad > 0){
-      disponible = true;
-    }
+  private boolean disponible = false;
+  public Herramienta(String nombreDeHerramienta, int cantidad){
+    this.nombreDeHerramienta = nombreDeHerramienta;
+    this.cantidad = cantidad;
+    if (cantidad > 0) disponible = true;
   }
 
   public void prestarHerramienta(int cantidad){
@@ -33,7 +23,7 @@ public class Herramienta{
     else{
       System.out.println("No tenemos "+ cantidad + " " + nombreDeHerramienta);
     }
-    if (this.cantidad == 0) disponible = false
+    if (this.cantidad == 0) disponible = false;
   }
 
   public void devolverHerramienta(int cantidad){

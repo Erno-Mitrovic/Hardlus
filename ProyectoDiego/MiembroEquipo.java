@@ -1,6 +1,21 @@
+import java.util.Date;
+
 public class MiembroEquipo{
-  public String miembroEquipo;
-  public MiembroEquipo(String miembroEquipo){
-    this.miembroEquipo = miembroEquipo;
+  public String nombre;
+  public double tiempoEnEquipo;
+  int semestre;
+  String planDeEstudios;
+  String areaDelEquipo;
+  String equipoFTC;
+  Date cumpleanios;
+  String tarea;
+
+  public MiembroEquipo(String nombre, double tiempoEnEquipo, int semestre, String planDeEstudios, Date cumpleanios){
+    this.nombre = nombre;
+    this.tiempoEnEquipo = tiempoEnEquipo;
+    this.semestre = semestre;
+    this.planDeEstudios = planDeEstudios;
+    this.cumpleanios = cumpleanios;
   }
 }
+ 

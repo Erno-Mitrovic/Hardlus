@@ -1,23 +1,19 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        //Variables para guardar a mentores
-        /*
-        Mentor mentor;
-        Mentor mentor1;
-        Mentor mentor2;
-        */
+        Date fecha = new Date();
+        MiembroEquipo miembro;
+        Herramienta herramienta;
 
-        //Variables para guardar herramientas
-        /*
-        Herramienta herramienta1;
-        Herramienta herramienta2;
-        Herramienta herramienta3;
-        */
-        Herramienta herramienta1 = new Herramienta();
-        MiembroEquipo mentor = new MiembroEquipo("");
+        ArrayList <MiembroEquipo> miembros = new ArrayList();
+        ArrayList <Herramienta> herramientas = new ArrayList();
+
+        int indiceHerramienta = 0;
+        int indiceMiembro = 0;
         while(true){
 
             //Imprimir opciones del menu
@@ -34,23 +30,73 @@ public class Main {
                 case 1:
                     System.out.print("Ingresa el nombre del miembro del equipo: ");
                     String nombre = sc.next();
-                    mentor = new MiembroEquipo(nombre);
+                    System.out.print("Ingresa el tiempo en el equipo de "+ nombre + ": ");
+                    double tiempoEnEquipo = sc.nextDouble();
+                    System.out.print("Ingresa el semestre de " + nombre + ": ");
+                    int semestre = sc.nextInt();
+                    System.out.print("Ingresa el plan de estudios de " + nombre + ": ");
+                    String planDeEstudios = sc.next();
+                    System.out.print("Ingresa el día de cumpleaños de " + nombre + ": ");
+                    int diaDeCumple = sc.nextInt();
+                    fecha.setDate(diaDeCumple);
+                    System.out.print("Ingresa el mes de cumpleaños de " + nombre + ": ");
+                    int mesDeCumple = sc.nextInt();
+                    fecha.setMonth(mesDeCumple);
+
+                    miembro = new MiembroEquipo(nombre, tiempoEnEquipo, semestre, planDeEstudios, fecha);
+                    miembros.add(miembro);
                     break;
                 case 2:
-                    //Llamar al constructor de herramienta
-                    herramienta1.registrarHerramienta();
+                    System.out.println("Ingresa el nombre de la herramienta: ");
+                    String nombreDeHerramienta = sc.next();
+                    System.out.println("Ingresa la cantidad de "+ nombreDeHerramienta + "s: ");
+                    int cantidad = sc.nextInt();
+
+                    herramienta = new Herramienta(nombreDeHerramienta, cantidad);
+                    herramientas.add(herramienta);
                     break;
                 case 3:
-                    System.out.print("Ingresa la cantidad que solicitas");
-                    int cantidad = sc.nextInt();
-                    herramienta1.prestarHerramienta(cantidad);
+                    Herramienta herramientaPrestar;
+                    System.out.println("¿Qué herramienta quieres pedir?, tenemos todas estas: ");
+                    for(Herramienta h:herramientas){
+                        System.out.println(h.nombreDeHerramienta);
+                        System.out.println("Hay " + h.cantidad + " " + h.nombreDeHerramienta);
+                    }
+                    System.out.println("Ingresa que herramienta quieres: ");
+                    String herramientaPrestada = sc.next();
+                    for (Herramienta herr:herramientas){
+                        if (herramientaPrestada.equals(herr.nombreDeHerramienta)){
+                            break;
+                        }
+                        indiceHerramienta++;
+                    }
+                    System.out.print("Ingresa la cantidad que solicitas de " + herramientaPrestada + "s: ");
+                    int cantidadAPrestar = sc.nextInt();
+                    herramientaPrestar = herramientas.get(indiceHerramienta);
+                    herramientaPrestar.prestarHerramienta(cantidadAPrestar);
+
+                    herramientas.set(indiceHerramienta, herramientaPrestar);
                     break;
-                case 4: 
+                case 4:
+                    Herramienta herramientaDevolver;
+                    indiceHerramienta = 0;
+                    System.out.println("¿Qué herramienta vas a devolver?");
+                    String devolver = sc.next();
+                    for(Herramienta h:herramientas){
+                        if (h.nombreDeHerramienta.equals(devolver)){
+                            break;
+                        }
+                        indiceHerramienta++;
+                    }
+
                     System.out.println("¿Cuántas vas a devolver?");
-                    int cantidad = sc.nextInt();
-                    herramienta1.devolverHerramienta(cantidad);
+                    int cantidadADevolver = sc.nextInt();
+                    herramientaDevolver = herramientas.get(indiceHerramienta);
+                    herramientaDevolver.devolverHerramienta(cantidadADevolver);
+                    herramientas.set(indiceHerramienta,herramientaDevolver);
                     break;
-                case 5: return;
+                case 5:
+                    return;
             }
         }
     }
