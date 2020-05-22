@@ -8,20 +8,25 @@ public class Main {
         Date fecha = new Date();
         MiembroEquipo miembro;
         Herramienta herramienta;
+        Mentor mentor;
 
-        ArrayList <MiembroEquipo> miembros = new ArrayList();
+        ArrayList <Integrante> integrantes = new ArrayList();
         ArrayList <Herramienta> herramientas = new ArrayList();
+        ArrayList <Mentor> mentores = new ArrayList();
 
+        //Los índices son por si acaso
         int indiceHerramienta = 0;
         int indiceMiembro = 0;
+        int indiceMentor = 0;
         while(true){
 
             //Imprimir opciones del menu
             System.out.println("1. Agregar miembro del equipo.");
-            System.out.println("2. Agregar herramienta");
-            System.out.println("3. Prestar herramienta");
-            System.out.println("4. Devolver herramienta");
-            System.out.println("5. Exit\n");
+            System.out.println("2. Agregar mentor.");
+            System.out.println("3. Agregar herramienta.");
+            System.out.println("4. Prestar herramienta.");
+            System.out.println("5. Devolver herramienta.");
+            System.out.println("6. Exit\n");
             System.out.print("Elige una opcion: ");
 
             //Leer input del usuario
@@ -43,10 +48,46 @@ public class Main {
                     int mesDeCumple = sc.nextInt();
                     fecha.setMonth(mesDeCumple);
 
-                    miembro = new MiembroEquipo(nombre, tiempoEnEquipo, semestre, planDeEstudios, fecha);
-                    miembros.add(miembro);
+                    integrante = new Integrante(nombre, tiempoEnEquipo, semestre, planDeEstudios, fecha);
+                    integrantes.add(integrante);
                     break;
                 case 2:
+                    System.out.println("Ingresa el nombre del mentor: ");
+                    String nombreDeMentor = sc.next();
+                    System.out.print("Ingresa el tiempo en el equipo de "+ nombreDeMentor + ": ");
+                    double tiempoEnEquipo = sc.nextDouble();
+                    System.out.print("Ingresa el semestre de " + nombreDeMentor + ": ");
+                    int semestre = sc.nextInt();
+                    System.out.print("Ingresa el plan de estudios de " + nombreDeMentor + ": ");
+                    String planDeEstudios = sc.next();
+                    System.out.print("Ingresa el día de cumpleaños de " + nombreDeMentor + ": ");
+                    int diaDeCumple = sc.nextInt();
+                    fecha.setDate(diaDeCumple);
+                    System.out.print("Ingresa el mes de cumpleaños de " + nombreDeMentor + ": ");
+                    int mesDeCumple = sc.nextInt();
+                    fecha.setMonth(mesDeCumple);
+
+                    mentor = new Mentor(nombreDeMentor, tiempoEnEquipo, semestre, planDeEstudios, fecha);
+                    mentores.add(mentor);
+
+                    System.out.println("¿" + nombreDeMentor + " quiere asignar una tarea? (Si/No)");
+                    String ans = sc.next();
+                    if ans.equals("Si"){
+                      System.out.println("Los integrantes registrados son: ")
+                      for (int i = 0;i < integrantes.size() ; i++) {
+                        Integrante integrante = integrantes.get(i);
+                        int pos = i++;
+                        System.out.println(pos + ". " + integrante.nombre);
+                      }
+                      System.out.println("¿A qué miembro del equipo le va a asignar una tarea? (Ingresa el número)");
+                      int index = sc.nextInt() - 1;
+                      Integrante integrante = integrantes.get(index);
+                      System.out.println("¿Qué tarea va a tener "+ integrante.nombre + "?");
+                      String tarea = sc.next();
+                      mentor.asignarTarea(integrante, tarea);
+                    }
+                    else break;
+                case 3:
                     System.out.println("Ingresa el nombre de la herramienta: ");
                     String nombreDeHerramienta = sc.next();
                     System.out.println("Ingresa la cantidad de "+ nombreDeHerramienta + "s: ");
@@ -55,7 +96,7 @@ public class Main {
                     herramienta = new Herramienta(nombreDeHerramienta, cantidad);
                     herramientas.add(herramienta);
                     break;
-                case 3:
+                case 4:
                     Herramienta herramientaPrestar;
                     System.out.println("¿Qué herramienta quieres pedir?, tenemos todas estas: ");
                     for(Herramienta h:herramientas){
@@ -77,7 +118,7 @@ public class Main {
 
                     herramientas.set(indiceHerramienta, herramientaPrestar);
                     break;
-                case 4:
+                case 5:
                     Herramienta herramientaDevolver;
                     indiceHerramienta = 0;
                     System.out.println("¿Qué herramienta vas a devolver?");
@@ -95,7 +136,7 @@ public class Main {
                     herramientaDevolver.devolverHerramienta(cantidadADevolver);
                     herramientas.set(indiceHerramienta,herramientaDevolver);
                     break;
-                case 5:
+                case 6:
                     return;
             }
         }
