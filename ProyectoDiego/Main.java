@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         Date fecha = new Date();
-        MiembroEquipo miembro;
+        Integrante integrante;
         Herramienta herramienta;
         Mentor mentor;
 
@@ -41,6 +41,10 @@ public class Main {
                     int semestre = sc.nextInt();
                     System.out.print("Ingresa el plan de estudios de " + nombre + ": ");
                     String planDeEstudios = sc.next();
+                    System.out.println("Ingresa el area en el equipo de " + nombre + ": ");
+                    String areaDelEquipo = sc.next();
+                    System.out.println("Ingresa el equipo FTC de "+ nombre + ": ");
+                    String equipoFTC = sc.next();
                     System.out.print("Ingresa el día de cumpleaños de " + nombre + ": ");
                     int diaDeCumple = sc.nextInt();
                     fecha.setDate(diaDeCumple);
@@ -48,40 +52,46 @@ public class Main {
                     int mesDeCumple = sc.nextInt();
                     fecha.setMonth(mesDeCumple);
 
-                    integrante = new Integrante(nombre, tiempoEnEquipo, semestre, planDeEstudios, fecha);
+                    integrante = new Integrante(nombre, tiempoEnEquipo, semestre, planDeEstudios, areaDelEquipo,
+                    equipoFTC, fecha);
                     integrantes.add(integrante);
                     break;
                 case 2:
                     System.out.println("Ingresa el nombre del mentor: ");
                     String nombreDeMentor = sc.next();
                     System.out.print("Ingresa el tiempo en el equipo de "+ nombreDeMentor + ": ");
-                    double tiempoEnEquipo = sc.nextDouble();
+                    double tiempoEnElEquipo = sc.nextDouble();
                     System.out.print("Ingresa el semestre de " + nombreDeMentor + ": ");
-                    int semestre = sc.nextInt();
+                    int semestreProfesional = sc.nextInt();
                     System.out.print("Ingresa el plan de estudios de " + nombreDeMentor + ": ");
-                    String planDeEstudios = sc.next();
+                    String planDeCarrera = sc.next();
+                    System.out.println("Ingresa el area en el equipo de " + nombreDeMentor + ": ");
+                    String areaEnEquipo = sc.next();
+                    System.out.println("Ingresa el equipo FTC de "+ nombreDeMentor + ": ");
+                    String equipoMentor = sc.next();
                     System.out.print("Ingresa el día de cumpleaños de " + nombreDeMentor + ": ");
-                    int diaDeCumple = sc.nextInt();
-                    fecha.setDate(diaDeCumple);
+                    int diaCumple = sc.nextInt();
+                    fecha.setDate(diaCumple);
                     System.out.print("Ingresa el mes de cumpleaños de " + nombreDeMentor + ": ");
-                    int mesDeCumple = sc.nextInt();
-                    fecha.setMonth(mesDeCumple);
+                    int mesCumple = sc.nextInt();
+                    fecha.setMonth(mesCumple);
 
-                    mentor = new Mentor(nombreDeMentor, tiempoEnEquipo, semestre, planDeEstudios, fecha);
+                    mentor = new Mentor(nombreDeMentor, tiempoEnElEquipo, semestreProfesional,
+                    planDeCarrera, areaEnEquipo, equipoMentor, fecha);
                     mentores.add(mentor);
 
                     System.out.println("¿" + nombreDeMentor + " quiere asignar una tarea? (Si/No)");
                     String ans = sc.next();
-                    if ans.equals("Si"){
-                      System.out.println("Los integrantes registrados son: ")
+                    if (ans.equals("Si")){
+                      System.out.println("Los integrantes registrados son: ");
                       for (int i = 0;i < integrantes.size() ; i++) {
-                        Integrante integrante = integrantes.get(i);
+                        integrante = integrantes.get(i);
                         int pos = i++;
                         System.out.println(pos + ". " + integrante.nombre);
                       }
                       System.out.println("¿A qué miembro del equipo le va a asignar una tarea? (Ingresa el número)");
                       int index = sc.nextInt() - 1;
-                      Integrante integrante = integrantes.get(index);
+                      integrante = integrantes.get(index);
                       System.out.println("¿Qué tarea va a tener "+ integrante.nombre + "?");
                       String tarea = sc.next();
                       mentor.asignarTarea(integrante, tarea);

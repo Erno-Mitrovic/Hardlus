@@ -10,7 +10,8 @@ public class MiembroEquipo{
   Date cumpleanios;
   String tarea;
 
-  public MiembroEquipo(String nombre, double tiempoEnEquipo, int semestre, String planDeEstudios, String areaDelEquipo, String equipoFTC, Date cumpleanios){
+  public MiembroEquipo(String nombre, double tiempoEnEquipo, int semestre, String planDeEstudios,
+  String areaDelEquipo, String equipoFTC, Date cumpleanios){
     this.nombre = nombre;
     this.tiempoEnEquipo = tiempoEnEquipo;
     this.semestre = semestre;
