@@ -63,7 +63,7 @@ public class Main {
                     double tiempoEnElEquipo = sc.nextDouble();
                     System.out.print("Ingresa el semestre de " + nombreDeMentor + ": ");
                     int semestreProfesional = sc.nextInt();
-                    System.out.print("Ingresa el plan de estudios de " + nombreDeMentor + ": ");
+                    System.out.print("Ingresa la carrera " + nombreDeMentor + ": ");
                     String planDeCarrera = sc.next();
                     System.out.println("Ingresa el area en el equipo de " + nombreDeMentor + ": ");
                     String areaEnEquipo = sc.next();
@@ -85,8 +85,8 @@ public class Main {
                     if (ans.equals("Si")){
                       System.out.println("Los integrantes registrados son: ");
                       for (int i = 0;i < integrantes.size() ; i++) {
+                        int pos = i + 1;
                         integrante = integrantes.get(i);
-                        int pos = i++;
                         System.out.println(pos + ". " + integrante.nombre);
                       }
                       System.out.println("¿A qué miembro del equipo le va a asignar una tarea? (Ingresa el número)");
@@ -96,7 +96,7 @@ public class Main {
                       String tarea = sc.next();
                       mentor.asignarTarea(integrante, tarea);
                     }
-                    else break;
+                    break;
                 case 3:
                     System.out.println("Ingresa el nombre de la herramienta: ");
                     String nombreDeHerramienta = sc.next();
@@ -147,6 +147,8 @@ public class Main {
                     herramientas.set(indiceHerramienta,herramientaDevolver);
                     break;
                 case 6:
+                    integrante = integrantes.get(0);
+                    System.out.println(integrante.tarea);
                     return;
             }
         }
